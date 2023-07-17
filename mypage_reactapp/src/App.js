@@ -24,8 +24,8 @@ function App() {
           </u1>
         </nav>
         <Routes>
-          <Route path="/home" component={Home} />
-          <Route path="/user" component={User} />
+          <Route path="/home" Component={Home} />
+          <Route path="/user" Component={User} />
         </Routes>
       </div>
     </BrowserRouter>

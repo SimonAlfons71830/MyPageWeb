@@ -94,5 +94,40 @@ namespace MyPageWeb.Controllers
 
             return new JsonResult(table);
         }
+
+        // API method to update values for selected user
+        [HttpPut("{id}")]
+        public JsonResult Put(int id, User user)
+        {
+            // using raw queries
+            string query = @"UPDATE users SET username = @Username, email = @Email, password = @Password WHERE id = @Id";
+
+            // save data to datatable
+            DataTable table = new DataTable();
+
+            // taking connection string from User secrets
+            string sqlDataSource = _configuration.GetConnectionString("MyDatabaseConnection");
+            //string sqlDataSource = _connectionString;
+            MySqlDataReader myReader;
+            using (MySqlConnection myCon = new MySqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (MySqlCommand myCommand = new MySqlCommand(query, myCon))
+                {
+                    myCommand.Parameters.AddWithValue("@Id", id);
+                    myCommand.Parameters.AddWithValue("@Username", user.UserName);
+                    myCommand.Parameters.AddWithValue("@Email", user.Email);
+                    myCommand.Parameters.AddWithValue("@Password", user.Password);
+
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+
+            return new JsonResult(table);
+        }
+
     }
 }

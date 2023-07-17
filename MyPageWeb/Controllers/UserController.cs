@@ -24,11 +24,11 @@ namespace MyPageWeb.Controllers
         }
 
         //API method to get all data from table
-        [HttpGet]
+        [HttpGet(Name = "GetUsersFromDB")]
         public JsonResult Get()
         {
             //using raw querries
-            string query = @"select id, username from users";
+            string query = @"select id, username, email from users";
 
             //save data to datatable
             DataTable table = new DataTable();

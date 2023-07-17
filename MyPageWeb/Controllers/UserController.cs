@@ -21,16 +21,6 @@ namespace MyPageWeb.Controllers
             
             _configuration = configuration;
 
-            /*//retrieve connection string from appsettings
-            var server = configuration["MyDatabaseConnection:Server"];
-            var port = configuration["MyDatabaseConnection:Port"];
-            var database = configuration["MyDatabaseConnection:Database"];
-            var username = configuration["MyDatabaseConnection:Uid"];
-            //retrieve the password from environment variable
-            var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
-            //create connection string
-            _connectionString = $"Server: {server};Port: {port};Database: {database};Uid: {username};Pwd: {password};";*/
-
         }
 
         //API method to get all data from table

@@ -18,7 +18,7 @@ namespace MyPageWeb.Controllers
 
         public UserController(IConfiguration configuration)
         {
-            
+
             _configuration = configuration;
 
         }
@@ -82,7 +82,7 @@ namespace MyPageWeb.Controllers
                 }
             }
 
-            return new JsonResult(table);
+            return new JsonResult("user inserted");
         }
 
         // API method to update values for selected user
@@ -116,7 +116,38 @@ namespace MyPageWeb.Controllers
                 }
             }
 
-            return new JsonResult(table);
+            return new JsonResult("user updated");
+        }
+
+        // API method to delete user with selected id
+        [HttpDelete("{id}")]
+        public JsonResult Delete(int id)
+        {
+            // using raw queries
+            string query = @"DELETE FROM users WHERE id = @Id";
+
+            // save data to datatable
+            DataTable table = new DataTable();
+
+            // taking connection string from User secrets
+            string sqlDataSource = _configuration.GetConnectionString("MyDatabaseConnection");
+            //string sqlDataSource = _connectionString;
+            MySqlDataReader myReader;
+            using (MySqlConnection myCon = new MySqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (MySqlCommand myCommand = new MySqlCommand(query, myCon))
+                {
+                    myCommand.Parameters.AddWithValue("@Id", id);
+
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+
+            return new JsonResult("user deleted");
         }
 
     }

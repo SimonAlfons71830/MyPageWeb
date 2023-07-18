@@ -1,5 +1,31 @@
+.navbar {
+  background-color: #695842; /* Change the background color to brown */
+}
+
+.nav-item {
+  margin: 0 1rem; /* Adjust the spacing between navbar items */
+}
+
+.container {
+  width: 100%;
+  max-width: 1140px; /* Change the maximum width as per your design */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px; /* Add padding to the left side */
+  padding-right: 15px; /* Add padding to the right side */
+}
+
+.container-fluid {
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+
 .App {
   text-align: center;
+  background: #B3A580;
+  width: 100%;
 }
 
 .App-logo {
@@ -14,7 +40,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #685642;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

@@ -1,26 +1,20 @@
 import React from "react";
-import "./App.css";
-import { Home } from "./Home";
-import { User } from "./User";
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
-import Navbar from "./Navbar"; // Import the Navbar component
-import { Contact } from "./Contact";
+import Navigation from "./components/navigation";
+import { BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
+import PageRenderer from "./page-renderer";
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <div className="App">
-        <Navbar /> {/* Include the Navbar component */}
-        <h3 className="d-flex justify-content-center m-3">
-          React JS Frontend Simona
-        </h3>
-        <Routes>
-          <Route path="/home" Component={Home} />
-          <Route path="/user" Component={User} />
-          <Route path="/contact" Component={Contact} />
-        </Routes>
+        <Navigation />
+        <Switch>
+          <Route path="/:page" component={PageRenderer}/>
+          <Route path="/" render={() => <Redirect to="/home" />}/>
+          <Route Component={() => 404}/>
+        </Switch>
       </div>
-    </BrowserRouter>
+    </Router>
   );
 }
 
